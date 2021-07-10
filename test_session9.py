@@ -138,7 +138,7 @@ def test_compare_nt_dict_perf():
 
     #T1: Accessing Fields
     time_nt, _ = nt_field_access(profiles[0], profiles[0].blood_group)
-    time_dict, _ = dict_field_access(profiles[0]._asdict(), profiles[0].blood_group)
+    time_dict, _ = dict_field_access(dict(profiles[0]._asdict()), profiles[0].blood_group)
     assert(time_nt < time_dict), 'FieldAccess: Dictionaires are faster than NamedTuples!'
 
     #T2: Memory Usage
