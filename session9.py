@@ -1,7 +1,8 @@
-from faker import Faker
+import sys
 from collections import namedtuple, Counter
 from datetime import date
 from random import choice, randint, uniform
+from faker import Faker
 
 def getfaker_obj():
     '''
@@ -220,6 +221,71 @@ def dict_field_access(profile_dict, check_value):
     'random_key' in profile_dict
     check_value in profile_dict.values()
     profile_dict['age']
+
+@timed(1_000_000)
+def nt_size_compare(profile):
+    '''
+    Function to retrieve the memory occupied by namedtuple
+    '''
+    return sys.getsizeof(profile)
+
+@timed(1_000_000)
+def dict_size_compare(profile_dict):
+    '''
+    Function to retrieve the memory occupied by namedtuple
+    '''
+    return sys.getsizeof(profile_dict)
+
+@timed(1_000_000)
+def nt_instance_compare(profile1, profile2):
+    '''
+    Function to compare multiple objects of a namedtuple
+    '''
+    return profile1 == profile2
+
+@timed(1_000_000)
+def dict_instance_compare(profile_dict1, profile_dict2):
+    '''
+    Function to compare multiple objects of a namedtuple
+    '''
+    return profile_dict1 == profile_dict2
+
+@timed(1_000_000)
+def nt_unpacking(profile):
+    '''
+    Function to unpack the values from namedtuple
+    '''
+    blood_group, latitude, longitude, birthdate, age = profile
+    return blood_group, latitude, longitude, birthdate, age
+
+@timed(1_000_000)
+def dict_unpacking(profile_dict):
+    '''
+    Function to unpack the values from dictionary
+    '''
+    blood_group, latitude, longitude, birthdate, age = profile_dict.values()
+    return blood_group, latitude, longitude, birthdate, age
+
+@timed(1_000_000)
+def nt_create_new_instance(nt_class, new_values):
+    '''
+    Function to create new instance for the given named tuple
+    '''
+    profile_new = nt_class._make(new_values)
+    return profile_new
+
+@timed(1_000_000)
+def dict_create_new_instance(new_values):
+    '''
+    Function to create new instance for the given dictionary
+    '''
+    profile_dict_new = dict.fromkeys(['blood_group', 'latitude', 'longitude' 'birthdate', 'age'], 0)
+    profile_dict_new['blood_group'] = new_values[0]
+    profile_dict_new['latitude'] = new_values[1]
+    profile_dict_new['longitude'] = new_values[2]
+    profile_dict_new['birthdate'] = new_values[3]
+    profile_dict_new['age'] = new_values[4]
+    return profile_dict_new
 
 def calc_open_value(stocks, weights):
     '''

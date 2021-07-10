@@ -139,11 +139,29 @@ def test_compare_nt_dict_perf():
     #T1: Accessing Fields
     time_nt, _ = nt_field_access(profiles[0], profiles[0].blood_group)
     time_dict, _ = dict_field_access(profiles[0]._asdict(), profiles[0].blood_group)
-    assert(time_nt < time_dict), 'FieldAccess: Dictionaires are better than NamedTuples!'
+    assert(time_nt < time_dict), 'FieldAccess: Dictionaires are faster than NamedTuples!'
+
     #T2: Memory Usage
-    nt_size = sys.getsizeof(profiles[0])
-    dict_size = sys.getsizeof(dict(profiles[0]._asdict()))
+    _, nt_size = nt_size_compare(profiles[0])
+    _, dict_size = dict_size_compare(dict(profiles[0]._asdict()))
     assert(nt_size < dict_size), 'Memory Usage: Dictionaires occupy less memory than NamedTuples!'
+
+    #T3: Comparing two instances
+    time_nt = nt_instance_compare(profiles[0], profiles[0])
+    time_dict = dict_instance_compare(dict(profiles[0]._asdict()), dict(profiles[0]._asdict()))
+    assert(time_nt < time_dict), 'Instance Compare: Dictionaires are faster than NamedTuples!'
+
+    #T4: Unpacking values
+    time_nt = nt_unpacking(profiles[0])
+    time_dict = dict_unpacking(dict(profiles[0]._asdict()))
+    assert(time_nt < time_dict), 'Unpack Values: Dictionaires are faster than NamedTuples!'
+
+    #T5: create new instance
+    Profile = namedtuple('Profile', 'blood_group latitude longitude birthdate age')
+    new_values = ['AB+', 123.45, 67.8, date(1979, 2, 22), 32456]
+    time_nt, _ = nt_create_new_instance(Profile, new_values)
+    time_dict, _ = dict_create_new_instance(new_values)
+    assert(time_nt < time_dict), 'Create New Instance: Dictionaires are faster than NamedTuples!'
 
 def test_stock_exchange():
     stocks, weights = session9.create_stock_exchange(100)

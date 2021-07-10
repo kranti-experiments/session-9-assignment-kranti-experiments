@@ -135,6 +135,31 @@ This fucntion computes the average/mean current location for the given profiles
 ### calc_time_dict_oldest_average_age() <br/>
 This function computes the oldest age, average/mean age from the given profiles and returns the same
 
+
+### nt_field_access() <br/>
+### dict_field_access() <br/>
+These functions access fields from the namedtuple/dictionary objects and used for comparing the average time taken to perform these operations for namedtuples and dictionary classes
+
+### nt_size_compare() <br/>
+### dict_size_compare() <br/>
+These functions access memory occupied by the namedtuple/dictionary objects and used for comparing the average size taken to perform these operations for namedtuples and dictionary classes
+
+### nt_instance_compare() <br/>
+### dict_instance_compare() <br/>
+These functions compare two instances of namedtuple/dictionary and used for comparing the average time taken to perform these operations for namedtuples and dictionary classes
+
+### nt_unpacking() <br/>
+### dict_unpacking() <br/>
+These functions unpack values from the objects of namedtuple/dictionary and used for comparing the average time taken to perform these operations for namedtuples and dictionary classes
+
+### nt_create_new_instance() <br/>
+### dict_create_new_instance() <br/>
+These functions create new instances of namedtuple/dictionary and used for comparing the average time taken to perform these operations for namedtuples and dictionary classes
+
+### nt_create_new_instance() <br/>
+### dict_create_new_instance() <br/>
+These functions create new instances of namedtuple/dictionary and used for comparing the average time taken to perform these operations for namedtuples and dictionary classes
+
 #### calc_open_value() <br/>
 This is a function to compute the market opening value <br/>
 Uses the 'open' value for each stock and by multiplying with its weight gives today's market opening value <br/>
